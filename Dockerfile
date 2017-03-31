@@ -2,9 +2,15 @@ FROM fedora:rawhide
 MAINTAINER zwPapEr <zw.paper@gmail.com>
 
 # Env
-RUN dnf install -y zsh tmux git
+RUN dnf install -y zsh tmux git openssh-server procps
 RUN dnf install -y emacs-nox global
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+RUN echo "root:root" | chpasswd
+RUN sed -i 's/#Port/Port/g' /etc/ssh/sshd_config
+RUN sed -i 's/#AddressFamily/AddressFamily/g' /etc/ssh/sshd_config
+RUN sed -i 's/#ListenAddress/ListenAddress/g' /etc/ssh/sshd_config
+RUN sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
+RUN /usr/bin/ssh-keygen -A
 
 # Dev software
 RUN dnf install -y gcc gdb
@@ -27,4 +33,4 @@ RUN rm -f /root/dotfile.zip
 
 WORKDIR /data
 
-CMD ["tmux"]
+CMD ["/usr/sbin/sshd", "-D"]
