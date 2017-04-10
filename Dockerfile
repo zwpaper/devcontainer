@@ -12,6 +12,9 @@ RUN sed -i 's/#ListenAddress/ListenAddress/g' /etc/ssh/sshd_config
 RUN sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
 RUN /usr/bin/ssh-keygen -A
 
+# Network tools
+RUN dnf install -y net-tools iproute
+
 # Dev software
 RUN dnf install -y gcc gdb
 
@@ -22,6 +25,7 @@ RUN go get -u github.com/nsf/gocode
 RUN go get -u github.com/rogpeppe/godef
 RUN go get -u golang.org/x/tools/cmd/goimports
 
+# dot files
 RUN dnf install -y unzip
 ADD https://github.com/zwpaper/dotfile/archive/master.zip /root/dotfile.zip
 RUN cd /root && unzip dotfile.zip && mkdir /root/repo && mv /root/dotfile-master /root/repo/dotfile
