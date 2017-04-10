@@ -11,6 +11,7 @@ RUN sed -i 's/#AddressFamily/AddressFamily/g' /etc/ssh/sshd_config
 RUN sed -i 's/#ListenAddress/ListenAddress/g' /etc/ssh/sshd_config
 RUN sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
 RUN /usr/bin/ssh-keygen -A
+RUN usermod -s /usr/bin/zsh root
 
 # Network tools
 RUN dnf install -y net-tools iproute
