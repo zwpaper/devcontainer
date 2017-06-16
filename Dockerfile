@@ -3,6 +3,7 @@ MAINTAINER zwPapEr <zw.paper@gmail.com>
 
 # Env
 RUN echo "root:root" | chpasswd
+RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 RUN dnf install -y zsh mosh tmux openssh-server \
     procps net-tools iproute                    \
     git man &&                                  \
