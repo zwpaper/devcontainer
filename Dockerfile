@@ -5,7 +5,8 @@ MAINTAINER zwPapEr <zw.paper@gmail.com>
 RUN echo "root:root" | chpasswd
 RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 RUN dnf install -y zsh mosh tmux openssh-server \
-    procps net-tools iproute                    \
+    net-tools iproute ping telnet               \
+    find procps                                 \
     git man &&                                  \
     dnf clean all
 RUN ssh-keygen -A
