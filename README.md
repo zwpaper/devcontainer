@@ -3,8 +3,8 @@ Dev Env in docker
 
 Software installed in docker read only, code and settings(dot files) store as volumes, changable.
 
-Use a Dockerfile to create docker with software installed
-Use a docker compose to set hostname, expose ports, and add volumes.
+- Use a Dockerfile to create docker with software installed
+- Use a docker compose to set hostname, expose ports, and add volumes.
 
 ## Contents
 ### fedora
